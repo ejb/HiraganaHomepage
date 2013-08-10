@@ -349,7 +349,7 @@ $('.correct').click(function(){
    // alert("Correct!"); 
    // $('.incorrect').fadeTo(500,0.1);
    $('.choices').addClass('over');
-   $('body').addClass('over');
+   $('.bg').addClass('over');
 });
 
 $('.incorrect').click(function(){
