@@ -287,9 +287,55 @@ var katakana = [
 // ========================
 // Alphabet selection
 
+var alphs = ['hiragana','katakana'];
+
+function save_prefs(){
+    var prefs = {};
+
+    for (var i = 0; i < alphs.length; i++) {
+        var current = alphs[i];      
+        if ( $('input[value="'+alphs[i]+'"]').prop('checked') == true ) { 
+            prefs[current] = true;
+        } else {
+            prefs[current] = false;  
+        }
+    }
+    // save as cookie
+    console.log("\n Prefs being saved:");
+    console.log(prefs);
+    $.cookie('prefs', prefs);
+}
+
+function load_prefs(){
+    var choice = $.cookie('prefs');
+    // set checkboxes
+    for (var i = 0; i < alphs.length; i++) {
+        var current = alphs[i];      
+        if ( $('input[value="'+alphs[i]+'"]').prop('checked') == true ) { 
+            prefs[current] = true;
+        } else {
+            prefs[current] = false;  
+        }
+    }
+    
+    // set quiz
+}
+
+
+$.cookie.json = true;
+
+var select = ['hiragana','katakana'];
 var quiz = [];
 
-var choice = $.cookie('alphabet');
+
+var available_alphas = ['hiragana','katakana'];
+for (var i = 0; i < available_alphas.length; i++) {
+    if (jQuery.inArray(available_alphas[i],choice)) {
+        load_prefs()
+    }
+  // Do something with element i.
+}
+
 
 if (choice = "hk") {
     quiz = hiragana.concat(katakana);
@@ -297,16 +343,6 @@ if (choice = "hk") {
     quiz = katakana;
 } else {
     quiz = hiragana;
-}
-
-function save_prefs(choice){
-    // choices: h, k or hk
-    $.cookie('alphabet', choice);
-}
-
-function load_prefs(choice){
-    // set quiz
-    // set checkboxes
 }
 
 
@@ -370,37 +406,7 @@ $('.next').click(function(){
 });
 
 
-Object.prototype.getKeyByValue = function( value ) {
-    for( var prop in this ) {
-        if( this.hasOwnProperty( prop ) ) {
-             if( this[ prop ] === value )
-                 return prop;
-        }
-    }
-}
-
-var a_a = {
-};
-
-
-var update_checked = function() {
-    var chkbx = this.children;
-    if (chkbx.checked) {
-        a_a[ $(chkbx).val() ] = true;
-    } else {
-        a_a[ $(chkbx).val() ] = false;
-    }
-    console.log(a_a);
-
-    if ((a_a["h"] = true) && (a_a["k"] = true)) {
-        save_prefs("hk");
-    } else if (a_a["k"] = true) {
-        save_prefs("k");
-    } else {
-        save_prefs("h");
-    }
-};
  
-$( "label" ).change( update_checked );
+$( "input" ).click( save_prefs );
 
 
