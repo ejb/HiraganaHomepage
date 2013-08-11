@@ -287,14 +287,15 @@ var katakana = [
 // ========================
 // Alphabet selection
 
-var alphs = ['hiragana','katakana'];
 
 function save_prefs(){
+    console.log('saving after click on '+this);
     var prefs = {};
 
     for (var i = 0; i < alphs.length; i++) {
-        var current = alphs[i];      
-        if ( $('input[value="'+alphs[i]+'"]').prop('checked') == true ) { 
+        var current = alphs[i];   
+        var checked = $('input[value="'+alphs[i]+'"]').prop('checked');   
+        if ( checked = true ) { 
             prefs[current] = true;
         } else {
             prefs[current] = false;  
@@ -307,46 +308,33 @@ function save_prefs(){
 }
 
 function load_prefs(){
-    var choice = $.cookie('prefs');
-    // set checkboxes
-    for (var i = 0; i < alphs.length; i++) {
-        var current = alphs[i];      
-        if ( $('input[value="'+alphs[i]+'"]').prop('checked') == true ) { 
-            prefs[current] = true;
-        } else {
-            prefs[current] = false;  
+    if ($.cookie('prefs') != undefined ) {
+        var prefs = $.cookie('prefs');
+        for (var i = 0; i < alphs.length; i++) {
+            var current = alphs[i];     
+            // set checkboxes
+            $('input[value="'+alphs[i]+'"]').prop('checked', prefs[current]); 
+            // set quiz
+            if ( prefs[current] = true ) {
+                if ( alphs[i] ='hiragana' ) {
+                    quiz = [].concat(hiragana);
+                }
+                if ( alphs[i] ='katakana' ) {
+                    quiz = [].concat(katakana);
+                }            
+            }
         }
+    } else {
+        // set quiz default
+        quiz = hiragana;
     }
-    
-    // set quiz
 }
 
+var alphs = ['hiragana','katakana'];
 
 $.cookie.json = true;
 
-var select = ['hiragana','katakana'];
-var quiz = [];
-
-
-var available_alphas = ['hiragana','katakana'];
-for (var i = 0; i < available_alphas.length; i++) {
-    if (jQuery.inArray(available_alphas[i],choice)) {
-        load_prefs()
-    }
-  // Do something with element i.
-}
-
-
-if (choice = "hk") {
-    quiz = hiragana.concat(katakana);
-} else if (choice = "k") {
-    quiz = katakana;
-} else {
-    quiz = hiragana;
-}
-
-
-
+load_prefs();
 
 // ========================
 // Generate question
@@ -381,7 +369,6 @@ for (var i=0; i<choices.length; i++){
     } else {
         $('.choices li:nth-child('+(i+1)+')').html( choice ).addClass('incorrect');
     }
-    console.log( choice + i );
 };
 
 
@@ -407,6 +394,6 @@ $('.next').click(function(){
 
 
  
-$( "input" ).click( save_prefs );
+$( "input" ).change( save_prefs );
 
 
