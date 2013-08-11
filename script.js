@@ -350,6 +350,7 @@ $('.correct').click(function(){
    // $('.incorrect').fadeTo(500,0.1);
    $('.choices').addClass('over');
    $('.bg').addClass('over');
+   $('.next').addClass('active');
 });
 
 $('.incorrect').click(function(){
@@ -357,4 +358,7 @@ $('.incorrect').click(function(){
    // alert("Wrong, try again!"); 
 });
 
+$('.next').click(function(){
+    location.reload();
+});
 
