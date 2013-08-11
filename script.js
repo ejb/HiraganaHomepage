@@ -687,8 +687,13 @@ $('.next').click(function(){
     location.reload();
 });
 
+$( "input" ).change( function(){
+    save_prefs();
+    location.reload();
+} );
 
- 
-$( "input" ).change( save_prefs );
-
-
+$('.prefs-switch').click( function(){
+    $(this).html
+    $(this).html($(this).html() == 'Close settings' ? 'Settings' : 'Close settings');
+    $('.prefs').toggle();
+})

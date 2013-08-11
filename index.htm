@@ -91,6 +91,41 @@
             border-color: #ddd;
         }
         
+        .corner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            font-family: 'Helvetica';
+            margin: 20px;
+        }
+        
+        .prefs {
+            display: none;
+            background: white;
+            border: 1px solid #CCC;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        .prefs p {
+            margin: 0;
+            font-size: 12px;
+        }
+        
+        .prefs p.heading {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .prefs p.credit {
+            margin-top: 10px;
+        }
+        
+        .prefs-switch:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
         .bg {
             position: fixed;
             top: 0;
@@ -152,18 +187,25 @@
         
         <div class="next">Correct! Try another &rarr;</div>
         
-        <div class="prefs">
-            <form>
-              <p>
-                <label><input type="checkbox" name="alphabet" value="hiragana" checked="checked">Hiragana</label>
-              </p>
-              <p>
-                  <label><input type="checkbox" name="alphabet" value="katakana" >Katakana</label>
-              </p>
-            </form>
+        <div class="corner">
+            <span class="prefs-switch">Settings</span>
+        
+            <div class="prefs">            
+                <form>
+                    <!-- <p class="heading">Alphabets</p> -->
+                  <p>
+                    <label><input type="checkbox" name="alphabet" value="hiragana" checked="checked">Hiragana</label>
+                  </p>
+                  <p>
+                      <label><input type="checkbox" name="alphabet" value="katakana" >Katakana</label>
+                  </p>
+                </form>
+                <p class="credit">Made by <a href="http://github.com/fourunderscore">Elliot Bentley</a>.</p>
             
+            </div>
         </div>
         
+                
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
     <script src="jquery.cookie.js" type="text/javascript"></script>
     <script src="script.js" type="text/javascript"></script>
